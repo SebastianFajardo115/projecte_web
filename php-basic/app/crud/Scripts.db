@@ -1,0 +1,24 @@
+CREATE DATABASE Dev_BiblioJuegos;
+
+USE Dev_BiblioJuegos;
+
+CREATE TABLE Videojuego (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100),
+    categoria VARCHAR(100),
+    precio DOUBLE,
+    multijugador BOOLEAN,
+    peso DOUBLE
+);
+
+INSERT INTO Videojuego (nombre, categoria, precio, multijugador, peso) VALUES
+('The Legend of Zelda: Breath of the Wild', 'Aventura', 59.99, FALSE, 13.4),
+('Call of Duty: Modern Warfare II', 'Acción', 69.99, TRUE, 85.2),
+('Minecraft', 'Sandbox', 26.95, TRUE, 1.2),
+('Stardew Valley', 'Simulación', 14.99, TRUE, 0.5),
+('Elden Ring', 'RPG', 59.99, FALSE, 45.7),
+('Overwatch 2', 'Shooter', 0.00, TRUE, 30.1),
+('Animal Crossing: New Horizons', 'Simulación', 49.99, TRUE, 6.3),
+('Super Smash Bros. Ultimate', 'Lucha', 59.99, TRUE, 16.8),
+('Hades', 'Roguelike', 24.99, FALSE, 5.4),
+('Cyberpunk 2077', 'RPG', 59.99, FALSE, 70.5);
