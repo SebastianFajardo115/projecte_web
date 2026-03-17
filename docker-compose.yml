@@ -1,0 +1,85 @@
+services:
+  web_php:
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+      args:
+        DOCROOT: /var/www/html                # Servei PHP "clàssic"
+    container_name: php-basic-web
+    ports:
+      - "8000:80"                             # http://localhost:8000
+    volumes:
+      - ./app:/var/www/html
+      - ./docker/web/php-dev.ini:/usr/local/etc/php/conf.d/php-dev.ini
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks: [appnet]
+
+  web_laravel:
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+      args:
+        DOCROOT: /var/www/html/laravel/public  # Servei Laravel
+    container_name: php-laravel-web
+    ports:
+      - "8001:80"                             # http://localhost:8001
+    volumes:
+      - ./app:/var/www/html
+      - ./docker/web/php-dev.ini:/usr/local/etc/php/conf.d/php-dev.ini
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks: [appnet]
+
+  mysql:
+    image: mysql:8.4
+    container_name: php-basic-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: projecte
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    networks: [appnet]
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: php-basic-pma
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8080:80"                             # http://localhost:8080
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks: [appnet]
+
+  code:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: php-basic-code
+    environment:
+      PASSWORD: "alumnat"
+    ports:
+      - "8081:8443"                           # http://localhost:8081
+    volumes:
+      - ./app:/config/workspace
+    networks: [appnet]
+
+volumes:
+  mysql-data:
+#    external: true
+    name: php-basic_mysql-data
+
+networks:
+  appnet:
+    driver: bridge
