@@ -6,6 +6,10 @@ use App\Http\Controllers\EtiquetaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideojocController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GameController;
+
+Route::get('/games', [GameController::class, 'index']);
+Route::get('/games/{id}', [GameController::class, 'show']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/', function () {

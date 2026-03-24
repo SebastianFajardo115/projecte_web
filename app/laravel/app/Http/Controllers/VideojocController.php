@@ -1,30 +1,23 @@
 <?php
 
-
-
-
-
-
-
-
-
 namespace App\Http\Controllers;
 
 use App\Models\Videojoc;
 use Illuminate\Http\Request;
+use App\Services\RawgService;
 
 class VideojocController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $videojocs = Videojoc::all();
+public function index(RawgService $rawg)
+{
+    $videojocs = Videojoc::all();
+    $games = $rawg->getGames();
 
-        return view('videojocs.index', compact('videojocs'));
-    }
-
+    return view('videojocs.index', compact('videojocs', 'games'));
+}
     /**
      * Show the form for creating a new resource.
      */

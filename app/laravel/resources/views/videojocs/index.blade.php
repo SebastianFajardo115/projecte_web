@@ -143,4 +143,9 @@
     </tbody>
 </table>
 
+@foreach($games['results'] as $game)
+    <h2>{{ $game['name'] }}</h2>
+    <img src="{{ $game['background_image'] }}" width="200">
+@endforeach
+
 @endsection
