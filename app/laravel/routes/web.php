@@ -12,8 +12,9 @@ Route::get('/games', [GameController::class, 'index']);
 Route::get('/games/{id}', [GameController::class, 'show']);
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', function () {
-        return view('landing');
+    Route::get('/', function (\App\Services\RawgService $rawg) {
+        $games = $rawg->getGames();
+        return view('landing', compact('games'));
     })->name('welcome');
 });
 

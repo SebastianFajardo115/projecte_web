@@ -25,3 +25,4 @@ class GameController extends Controller
         return view('games.show', compact('game'));
     }
 }
+
