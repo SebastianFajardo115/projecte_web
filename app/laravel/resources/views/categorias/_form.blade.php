@@ -1,18 +1,20 @@
-<form action="{{ $action }}" method="POST" class="card p-4">
+<form action="{{ $action }}" method="POST" class="card p-6 space-y-4">
     @csrf
     @if ($method === 'PUT')
         @method('PUT')
     @endif
-    <div class="mb-3">
+    <div>
         <label class="form-label">Nom</label>
-        <input type="text" name="nom" class="form-control" value="{{ old('nom', $categoria->nom ?? '') }}" required>
-        @error('nom') <div class="text-danger">{{ $message }}</div> @enderror
+        <input type="text" name="nom" class="form-input" value="{{ old('nom', $categoria->nom ?? '') }}" required>
+        @error('nom') <div class="form-error">{{ $message }}</div> @enderror
     </div>
-    <div class="mb-3">
+    <div>
         <label class="form-label">Descripció</label>
-        <textarea name="descripcio" class="form-control" rows="3" required>{{ old('descripcio', $categoria->descripcio ?? '') }}</textarea>
-        @error('descripcio') <div class="text-danger">{{ $message }}</div> @enderror
+        <textarea name="descripcio" class="form-textarea" rows="3" required>{{ old('descripcio', $categoria->descripcio ?? '') }}</textarea>
+        @error('descripcio') <div class="form-error">{{ $message }}</div> @enderror
     </div>
-    <button class="btn btn-success">Desar</button>
-    <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancel·lar</a>
+    <div class="flex items-center gap-3 pt-2">
+        <button type="submit" class="btn-success">Desar</button>
+        <a href="{{ url()->previous() }}" class="btn-secondary">Cancel·lar</a>
+    </div>
 </form>

@@ -7,7 +7,7 @@
     <title>BiblioJocs - Gestiona tu colección de videojuegos</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
     <!-- Navbar -->
     <nav class="sticky top-0 z-50 bg-gradient-primary shadow-lg border-b border-primary-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,7 +76,7 @@
     </nav>
 
     <!-- Page Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Alerts -->
         @if (session('status') || session('success') || session('info'))
             <div class="mb-6 space-y-3">
@@ -111,7 +111,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 mt-12 py-8 border-t border-slate-800">
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
                 <div>
