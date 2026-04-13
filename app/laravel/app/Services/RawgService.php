@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 class RawgService
 {
-    protected $baseUrl = 'https://api.rawg.io/api';
+    protected $baseUrl = 'http://api.rawg.io/api';
 
     /**
      * Obtener lista de juegos
@@ -16,13 +16,12 @@ class RawgService
      * @param int $perPage
      * @return array
      */
-    public function getGames(?string $search = null, int $perPage = 20): array
+    public function getGames(?string $search = null, int $perPage = 40): array
     {
-        return Cache::remember("rawg_games_" . md5($search ?? ''), 3600, function () use ($search, $perPage) {
+        return Cache::remember("rawg_games_" . md5($search ?? '') . "_" . $perPage, 3600, function () use ($search, $perPage) {
             try {
-                $response = Http::withoutVerifying()   // evita error SSL en local
-                    ->timeout(10)                     // tiempo máximo de espera
-                    ->retry(3, 200)                   // reintentos
+                $response = Http::timeout(10)
+                    ->retry(3, 200)
                     ->get($this->baseUrl . '/games', [
                         'key' => config('services.rawg.key'),
                         'search' => $search,
