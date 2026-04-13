@@ -16,8 +16,8 @@
                             BiblioJocs
                         </h1>
                         <p class="text-xl text-slate-600 max-w-xl mx-auto">
-                            La teva plataforma per gestionar i organitzar la teva colència personal de videojuegos. 
-                            Manté un registre detallat dels teus jocs, el seu estat i més.
+                            La teva plataforma per gestionar i organitzar la teva col·lecció personal de videojocs.
+                            Mantingues un registre detallat dels teus jocs, el seu estat i molt més.
                         </p>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                     <div class="bg-white rounded-lg p-6 border border-slate-200 hover:shadow-md transition">
                         <div class="text-3xl mb-3">🎮</div>
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Organitza els teus jocs</h3>
-                        <p class="text-slate-600 text-sm">Manté un registre complet de tots els teus videojuegos amb detalls sobre plataforma, any de registre i preu.</p>
+                        <p class="text-slate-600 text-sm">Manté un registre complet de tots els teus videojocs amb detalls sobre plataforma, any de registre i preu.</p>
                     </div>
 
                     <div class="bg-white rounded-lg p-6 border border-slate-200 hover:shadow-md transition">
@@ -39,13 +39,13 @@
                     <div class="bg-white rounded-lg p-6 border border-slate-200 hover:shadow-md transition">
                         <div class="text-3xl mb-3">🏷️</div>
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Categoritzar</h3>
-                        <p class="text-slate-600 text-sm">Crea categories personalitzades per organitzar els teus jocs per gènere, sèrie o qualsevol altra criteri.</p>
+                        <p class="text-slate-600 text-sm">Crea categories personalitzades per organitzar els teus jocs per gènere, sèrie o qualsevol altre criteri.</p>
                     </div>
 
                     <div class="bg-white rounded-lg p-6 border border-slate-200 hover:shadow-md transition">
                         <div class="text-3xl mb-3">🔐</div>
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Accés segur</h3>
-                        <p class="text-slate-600 text-sm">La teva colència és privada. Inicia sesió de forma segura per accedir a tota la teva informació.</p>
+                        <p class="text-slate-600 text-sm">La teva col·lecció és privada. Inicia sessió de forma segura per accedir a tota la teva informació.</p>
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                         href="{{ route("login") }}" 
                         class="btn-primary px-8 py-4 text-lg"
                     >
-                        Iniciar sesió
+                        Iniciar sessió
                     </a>
                     <a 
                         href="{{ route("register") }}" 

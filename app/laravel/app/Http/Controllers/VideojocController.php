@@ -92,47 +92,44 @@ public function index(RawgService $rawg)
 
     public function complete(Videojoc $videojoc)
     {
-        // Si quieres asegurarte de que solo se pueda completar si no está ya completado
+        // Només es marca com a completat si encara no ho està
         if ($videojoc->estat !== 'COMPLETAT') {
             $videojoc->update(['estat' => 'COMPLETAT']);
-            
-            // Mensaje de éxito opcional
+
             return redirect()->route('videojocs.index')
-                ->with('success', '¡Videojuego marcado como completado!');
+                ->with('success', 'Videojoc marcat com a completat!');
         }
-        
+
         return redirect()->route('videojocs.index')
-            ->with('info', 'El videojuego ya estaba completado');
+            ->with('info', 'El videojoc ja estava completat.');
     }
 
-        public function jugar(Videojoc $videojoc)
+    public function jugar(Videojoc $videojoc)
     {
-        // Si quieres asegurarte de que solo se pueda completar si no está ya completado
+        // Només es marca com a jugant si encara no ho està
         if ($videojoc->estat !== 'JUGANT') {
             $videojoc->update(['estat' => 'JUGANT']);
-            
-            // Mensaje de éxito opcional
+
             return redirect()->route('videojocs.index')
-                ->with('success', '¡Videojuego marcado como completado!');
+                ->with('success', 'Videojoc marcat com a jugant!');
         }
-        
+
         return redirect()->route('videojocs.index')
-            ->with('info', 'El videojuego ya estaba completado');
+            ->with('info', 'El videojoc ja estava marcat com a jugant.');
     }
 
-        public function pendent(Videojoc $videojoc)
+    public function pendent(Videojoc $videojoc)
     {
-        // Si quieres asegurarte de que solo se pueda completar si no está ya completado
+        // Només es marca com a pendent si encara no ho està
         if ($videojoc->estat !== 'PENDENT') {
             $videojoc->update(['estat' => 'PENDENT']);
-            
-            // Mensaje de éxito opcional
+
             return redirect()->route('videojocs.index')
-                ->with('success', '¡Videojuego marcado como completado!');
+                ->with('success', 'Videojoc marcat com a pendent!');
         }
-        
+
         return redirect()->route('videojocs.index')
-            ->with('info', 'El videojuego ya estaba completado');
+            ->with('info', 'El videojoc ja estava marcat com a pendent.');
     }
 
     /**

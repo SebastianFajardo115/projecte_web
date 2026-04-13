@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="max-w-2xl">
+    <div class="max-w-2xl mx-auto">
         <div class="mb-8">
             <a href="{{ route('videojocs.index') }}" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium mb-4">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

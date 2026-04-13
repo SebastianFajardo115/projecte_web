@@ -7,7 +7,7 @@
     <a class="btn btn-primary" href="{{ route('videojocs.create') }}">Afegir Videojoc</a>
 </div>
 
-<!-- Tabla: Videojuegos Jugant -->
+<!-- Taula: Videojocs jugant -->
 <h2>Jugant</h2>
 <table class="table table-striped">
     <thead>
@@ -31,7 +31,7 @@
                 <form action="{{ route('videojocs.complete', $v) }}" method="POST">
                     @csrf
                     @method('POST')
-                    <button class="btn btn-success btn-sm" onclick="return confirm('Completar?')">Completar</button>
+                    <button class="btn btn-success btn-sm" onclick="return confirm('Marcar com a completat?')">Completar</button>
                 </form>
             </td>
         </tr>
@@ -39,7 +39,7 @@
     </tbody>
 </table>
 
-<!-- Tabla: Videojuegos Pendents -->
+<!-- Taula: Videojocs pendents -->
 <h2>Pendents</h2>
 <table class="table table-striped">
     <thead>
@@ -71,7 +71,7 @@
     </tbody>
 </table>
 
-<!-- Tabla: Videojuegos Completats -->
+<!-- Taula: Videojocs completats -->
 <h2>Completats</h2>
 <table class="table table-striped">
     <thead>
@@ -103,7 +103,7 @@
     </tbody>
 </table>
 
-<!-- Tabla: Todos los videojuegos -->
+<!-- Taula: Tots els videojocs -->
 <h2>Tots els Videojocs</h2>
 <table class="table table-striped">
     <thead>

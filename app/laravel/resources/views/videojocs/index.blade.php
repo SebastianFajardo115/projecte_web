@@ -6,7 +6,7 @@
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
                 <h1 class="text-4xl font-bold text-slate-900">📚 BiblioJocs</h1>
-                <p class="text-slate-600 mt-1">Gestiona tu colección personal de videojuegos</p>
+                <p class="text-slate-600 mt-1">Gestiona la teva col·lecció personal de videojocs</p>
             </div>
             <div class="flex gap-2 flex-wrap">
                 <a href="{{ route('videojocs.create-from-rawg') }}" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold">
