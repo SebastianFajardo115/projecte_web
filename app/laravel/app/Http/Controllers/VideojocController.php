@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Videojoc;
 use Illuminate\Http\Request;
 use App\Services\RawgService;
+use App\Services\VideojocFromRawgService;
 
 class VideojocController extends Controller
 {
@@ -132,6 +133,57 @@ public function index(RawgService $rawg)
         
         return redirect()->route('videojocs.index')
             ->with('info', 'El videojuego ya estaba completado');
+    }
+
+    /**
+     * Mostrar formulario para crear videojuego desde RAWG
+     */
+    public function createFromRawg(RawgService $rawg)
+    {
+        $games = $rawg->getGames();
+        return view('videojocs.create-from-rawg', compact('games'));
+    }
+
+    /**
+     * Guardar videojuego creado desde RAWG
+     */
+    public function storeFromRawg(Request $request, VideojocFromRawgService $service)
+    {
+        $validated = $request->validate([
+            'game_id'     => 'required|integer',
+            'plataforma'  => 'required|string',
+            'estat'       => 'required|in:JUGANT,COMPLETAT,PENDENT',
+            'preu'        => 'nullable|numeric|min:0',
+        ]);
+
+        try {
+            $videojoc = $service->crearDesdeRawg(
+                gameId: $validated['game_id'],
+                plataforma: $validated['plataforma'],
+                estat: $validated['estat'],
+                preu: $validated['preu'] ?? 0
+            );
+
+            return redirect()->route('videojocs.show', $videojoc->id)
+                ->with('success', 'Videojuego importado desde RAWG correctamente!');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error al importar el videojuego: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    /**
+     * Obtener detalles de un juego de RAWG
+     */
+    public function gameDetail(int $gameId, RawgService $rawg)
+    {
+        try {
+            $game = $rawg->getGame($gameId);
+            return response()->json($game);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }
 

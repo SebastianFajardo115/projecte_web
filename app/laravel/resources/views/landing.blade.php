@@ -53,13 +53,13 @@
                 <div class="flex flex-col sm:flex-row gap-4 justify-center pt-8">
                     <a 
                         href="{{ route("login") }}" 
-                        class="inline-flex items-center justify-center px-6 py-3 bg-gradient-primary text-white rounded-lg hover:shadow-lg transition-shadow font-semibold"
+                        class="btn-primary px-8 py-4 text-lg"
                     >
                         Iniciar sesió
                     </a>
                     <a 
                         href="{{ route("register") }}" 
-                        class="inline-flex items-center justify-center px-6 py-3 bg-white text-primary-600 border-2 border-primary-600 rounded-lg hover:bg-primary-50 transition font-semibold"
+                        class="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-600 border-2 border-primary-600 rounded-lg hover:bg-primary-50 transition font-semibold text-lg"
                     >
                         Crear compte
                     </a>

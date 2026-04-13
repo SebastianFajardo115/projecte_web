@@ -23,7 +23,15 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('videojocs.index');
     })->name('dashboard');
 
+    // Rutas personalizadas de videojocs (ANTES del resource)
+    Route::get('videojocs/create-from-rawg', [VideojocController::class, 'createFromRawg'])->name('videojocs.create-from-rawg');
+    Route::post('videojocs/store-from-rawg', [VideojocController::class, 'storeFromRawg'])->name('videojocs.store-from-rawg');
+    Route::get('videojocs/game-detail/{gameId}', [VideojocController::class, 'gameDetail'])->name('videojocs.game-detail');
+
+    // Resource (genera index, store, show, edit, update, destroy)
     Route::resource('videojocs', VideojocController::class);
+
+    // Rutas de cambio de estado
     Route::post('videojocs/{videojoc}/complete', [VideojocController::class, 'complete'])->name('videojocs.complete');
     Route::post('videojocs/{videojoc}/jugar', [VideojocController::class, 'jugar'])->name('videojocs.jugar');
     Route::post('videojocs/{videojoc}/pendent', [VideojocController::class, 'pendent'])->name('videojocs.pendent');

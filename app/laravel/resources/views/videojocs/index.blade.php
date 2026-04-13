@@ -8,12 +8,20 @@
                 <h1 class="text-4xl font-bold text-slate-900">📚 BiblioJocs</h1>
                 <p class="text-slate-600 mt-1">Gestiona tu colección personal de videojuegos</p>
             </div>
-            <a href="{{ route('videojocs.create') }}" class="inline-flex items-center px-4 py-2 bg-gradient-primary text-white rounded-lg hover:shadow-lg transition-shadow font-semibold">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                </svg>
-                Afegir Videojoc
-            </a>
+            <div class="flex gap-2 flex-wrap">
+                <a href="{{ route('videojocs.create-from-rawg') }}" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Importar des de RAWG
+                </a>
+                <a href="{{ route('videojocs.create') }}" class="inline-flex items-center px-4 py-2 bg-gradient-primary text-white rounded-lg hover:shadow-lg transition-shadow font-semibold">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Afegir Videojoc
+                </a>
+            </div>
         </div>
 
         <!-- Stats Cards -->
