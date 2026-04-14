@@ -148,6 +148,8 @@ public function index(RawgService $rawg)
     {
         $validated = $request->validate([
             'game_id'     => 'required|integer',
+            'game_name'   => 'required|string',
+            'game_released' => 'nullable|string',
             'plataforma'  => 'required|string',
             'estat'       => 'required|in:JUGANT,COMPLETAT,PENDENT',
             'preu'        => 'nullable|numeric|min:0',
@@ -156,6 +158,8 @@ public function index(RawgService $rawg)
         try {
             $videojoc = $service->crearDesdeRawg(
                 gameId: $validated['game_id'],
+                gameName: $validated['game_name'],
+                gameReleased: $validated['game_released'],
                 plataforma: $validated['plataforma'],
                 estat: $validated['estat'],
                 preu: $validated['preu'] ?? 0

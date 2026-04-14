@@ -18,6 +18,10 @@
 
         <form action="{{ route('videojocs.store-from-rawg') }}" method="POST" class="space-y-6">
             @csrf
+            
+            <!-- Campos ocultos para pasar datos del juego seleccionado -->
+            <input type="hidden" name="game_name" id="game_name" value="">
+            <input type="hidden" name="game_released" id="game_released" value="">
 
             <!-- Selección de juego -->
             <div class="bg-white rounded-lg border border-slate-200 p-6">
@@ -49,6 +53,7 @@
                                 data-game-name="{{ $game['name'] }}"
                                 data-game-rating="{{ $game['rating'] ?? 0 }}"
                                 data-game-image="{{ $game['background_image'] ?? '' }}"
+                                data-game-released="{{ $game['released'] ?? '' }}"
                             >
                             <div class="peer-checked:ring-2 peer-checked:ring-primary-500 peer-checked:border-primary-500 border-2 border-slate-200 rounded-lg p-3 hover:border-primary-300 transition">
                                 @if($game['background_image'])
@@ -205,7 +210,16 @@
                 if (e.target.checked) {
                     document.getElementById('preview_name').textContent = e.target.dataset.gameName;
                     document.getElementById('preview_rating').textContent = e.target.dataset.gameRating + ' / 5';
-                    document.getElementById('preview_year').textContent = e.target.value;
+                    
+                    // Extraer año de la fecha (YYYY-MM-DD) o mostrar N/A
+                    const releaseDate = e.target.dataset.gameReleased;
+                    const year = releaseDate ? releaseDate.split('-')[0] : 'N/A';
+                    document.getElementById('preview_year').textContent = year;
+                    
+                    // Llenar los campos ocultos con los datos del juego
+                    document.getElementById('game_name').value = e.target.dataset.gameName;
+                    document.getElementById('game_released').value = releaseDate || '';
+                    
                     document.getElementById('preview_image').src = e.target.dataset.gameImage;
                     gamePreview.classList.remove('hidden');
                 }

@@ -20,22 +20,27 @@ class VideojocFromRawgService
      * Crear un videojuego desde datos de RAWG
      *
      * @param int $gameId ID del juego en RAWG
+     * @param string $gameName Nombre del juego
+     * @param string|null $gameReleased Fecha de lanzamiento
      * @param string $plataforma Plataforma del juego
      * @param string $estat Estado inicial (JUGANT, PENDENT, COMPLETAT)
      * @param float|null $preu Precio del juego
      * @return Videojoc
      */
-    public function crearDesdeRawg(int $gameId, string $plataforma, string $estat = 'PENDENT', ?float $preu = 0): Videojoc
+    public function crearDesdeRawg(int $gameId, string $gameName, ?string $gameReleased = null, string $plataforma, string $estat = 'PENDENT', ?float $preu = 0): Videojoc
     {
-        // Obtener datos de la API RAWG
+        // Obtener datos adicionales de la API RAWG
         $gameData = $this->rawgService->getGame($gameId);
 
-        return DB::transaction(function () use ($gameData, $plataforma, $estat, $preu) {
+        $nom = trim($gameName);
+        $anyEstrena = $this->extraerAnio($gameReleased);
+
+        return DB::transaction(function () use ($gameData, $plataforma, $estat, $preu, $nom, $anyEstrena) {
             // Crear el videojuego
             $videojoc = Videojoc::create([
-                'nom' => $gameData['name'] ?? 'Sin nombre',
+                'nom' => $nom,
                 'plataforma' => $plataforma,
-                'any_estrena' => $this->extraerAnio($gameData['released'] ?? null),
+                'any_estrena' => $anyEstrena,
                 'estat' => in_array($estat, ['JUGANT', 'COMPLETAT', 'PENDENT']) ? $estat : 'PENDENT',
                 'preu' => $preu,
             ]);
@@ -84,13 +89,14 @@ class VideojocFromRawgService
     private function extraerAnio(?string $fecha): int
     {
         if (!$fecha) {
-            return now()->year;
+            return 2000; // Año por defecto si no hay fecha
         }
 
         try {
-            return (int) substr($fecha, 0, 4);
+            $year = (int) substr($fecha, 0, 4);
+            return $year > 1980 && $year <= now()->year ? $year : 2000;
         } catch (\Exception $e) {
-            return now()->year;
+            return 2000;
         }
     }
 
