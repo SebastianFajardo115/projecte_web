@@ -1,9 +1,10 @@
 #!/bin/bash
 
-cd /var/www/html/laravel
+# Fix Apache MPM conflict
+a2dismod mpm_event mpm_worker 2>/dev/null || true
+a2enmod mpm_prefork 2>/dev/null || true
 
-echo "DB_URL: $DB_URL"
-echo "DB_HOST: $DB_HOST"
+cd /var/www/html/laravel
 
 php artisan config:clear
 php artisan migrate --force || echo "Migration failed, continuing..."
